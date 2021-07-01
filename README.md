@@ -16,12 +16,8 @@
 ### Hostnames for accessing the service directly
 
 * Local: http://127.0.0.1:8000
+  
 
-### Sign-up
-* /employees/signup
-Employees can create their accounts using this form.
-
-### Login
 * /employees/login
 
 There are 2 users: super-admin and employees.
@@ -29,8 +25,6 @@ There are 2 users: super-admin and employees.
 Employees can start a session and check the menu to select their option.
 
 Super-admin can create menu with its options and verify what employees selected. We use super-admin django to generate this one.
-
-* /employees/login
 
 Logo ut the user
 
