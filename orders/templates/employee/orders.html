@@ -1,0 +1,15 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<h1>Menu</h1>
+<div>Hello, {{user}}</div>
+{% if menu_uuid %}
+    <div><a href="{% url 'orders:ordered' menu_id=menu_uuid%}">Today's Menu</a></div>
+{% endif %}
+
+<ul>
+{% for order in orders %}
+    <li>{{ order.menu.date }} | {{order.option_selected.description}} </li>
+{% endfor %}
+</ul>
+{% endblock %}

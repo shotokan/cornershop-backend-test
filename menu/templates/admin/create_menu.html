@@ -1,0 +1,33 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+<h1>Create Menu</h1>
+<div>{{date_error}}</div>
+<br>
+<form action="{% url 'menu:create' %}" id="menu_create" method="post">
+    {% csrf_token %}
+    <label for="date">Date to be published:</label><br>
+    <input type="date" id="date" name="date"><br><br>
+
+    <label for="option1">Option 1:</label>
+
+    <textarea id="option1" name="option1" rows="4" cols="50">
+
+    </textarea>
+    <br>
+    <label for="option2">Option 2:</label>
+
+    <textarea id="option2" name="option2" rows="4" cols="50">
+
+    </textarea>
+    <br>
+    <label for="option3">Option 3:</label>
+
+    <textarea id="option3" name="option3" rows="4" cols="50">
+
+    </textarea>
+    <br><br>
+    <input type="submit">
+</form>
+
+{% endblock %}

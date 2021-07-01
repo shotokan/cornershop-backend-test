@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cornershop Test</title>
+</head>
+    <body>
+    <div><a href="/employees/signup/">Signup</a></div>
+        <div class="wrapper">
+            <h1>Log In</h1>
+            <form class="site-form" action="{% url 'employees:login' %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                {% if next %}
+                  <input type="hidden" name="next" value="{{ next }}" />
+                {% endif %}
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </body>
+</html>
