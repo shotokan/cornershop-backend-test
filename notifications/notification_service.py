@@ -10,14 +10,14 @@ class NotificationService:
     """
     This class is a service to be able to send a notification
     """
-    def __init__(self):
-        self.__slack_client = SlackWrapper()
+    def __init__(self, client):
+        self.client = client
 
     def send_message(self, menu_id):
         """
         Sends a notification to slack
         """
-        users = self.__slack_client.get_users()
+        users = self.client.get_users()
         for user in users:
             message = f"Hello, {user.username}!, see today's menu {DOMAIN}/menu/select/{menu_id}"
-            self.__slack_client.send_message(user, message)
+            self.client.send_message(user, message)

@@ -22,7 +22,7 @@ def orders_selected_view(request, menu_id):
     if request.method == "POST":
         form = SelectOption(request.POST)
         if form.is_valid():
-            #TODO: Here needs to be validated the limitation time to be able to select an option
+            # TODO: Here needs to be validated the limitation time to be able to select an option
             new_order = Orders()
             today_menu = TodayMenu.objects.get(uuid=menu_id)
             option_selected = MenuOptions.objects.get(pk=form.cleaned_data["option"])

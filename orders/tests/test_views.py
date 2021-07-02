@@ -1,9 +1,8 @@
 import uuid
-from django.utils import timezone
 
 import pytest
-
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from menu.models import MenuOptions, TodayMenu
 from orders.models import Orders

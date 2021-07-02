@@ -1,8 +1,8 @@
-from datetime import datetime, timedelta
-
-import pytz
+from datetime import datetime
 
 from django.utils import timezone
+
+import pytz
 
 from shared.constants import TIME_OVER
 
@@ -15,6 +15,7 @@ class TimeVerifier:
     ---------
     time_over: represents the time against which the current date and time will be compared
     """
+
     def __init__(self, time_over=TIME_OVER):
         self.time_over = time_over
 
@@ -35,7 +36,7 @@ class TimeVerifier:
             minute=0,
             second=0,
             microsecond=0,
-            tzinfo=chile
+            tzinfo=chile,
         ).astimezone(pytz.utc)
         print(end_time)
         if current_date.hour < end_time.hour:

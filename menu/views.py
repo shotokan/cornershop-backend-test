@@ -8,7 +8,7 @@ from django.shortcuts import redirect, render
 from notifications.tasks import send_menu_notification
 from shared.verify_time import TimeVerifier
 
-from .constants import OPTION_NAMES, TIME_OVER
+from .constants import OPTION_NAMES
 from .forms import CreateMenu, MenuOption
 from .models import MenuOptions, TodayMenu
 

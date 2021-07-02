@@ -1,8 +1,8 @@
 import uuid
-import pytest
 
 from unittest import mock
 
+import pytest
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -60,9 +60,14 @@ def test_should_get_the_form_to_create_a_menu(client, admin_user):
 
 
 def test_should_get_the_form_to_menu_select(
-    client, user_test, today_menu_test, menu_option_1_test, menu_option_2_test, menu_option_3_test
+    client,
+    user_test,
+    today_menu_test,
+    menu_option_1_test,
+    menu_option_2_test,
+    menu_option_3_test,
 ):
-    with mock.patch('menu.views.TimeVerifier') as MockTimeVerifier:
+    with mock.patch("menu.views.TimeVerifier") as MockTimeVerifier:
         MockTimeVerifier.return_value.is_before_end_time.return_value = True
         client.force_login(user_test)
         client.login(username=user_test.username, password=user_test.password)
@@ -72,9 +77,14 @@ def test_should_get_the_form_to_menu_select(
 
 
 def test_should_not_get_the_form_to_select_menu_and_return_bad_request(
-    client, user_test, today_menu_test, menu_option_1_test, menu_option_2_test, menu_option_3_test
+    client,
+    user_test,
+    today_menu_test,
+    menu_option_1_test,
+    menu_option_2_test,
+    menu_option_3_test,
 ):
-    with mock.patch('menu.views.TimeVerifier') as MockTimeVerifier:
+    with mock.patch("menu.views.TimeVerifier") as MockTimeVerifier:
         MockTimeVerifier.return_value.is_before_end_time.return_value = False
         client.force_login(user_test)
         client.login(username=user_test.username, password=user_test.password)
@@ -86,7 +96,7 @@ def test_should_not_get_the_form_to_select_menu_and_return_bad_request(
 
 def test_should_not_get_the_form_to_select_menu_no_menu_yet(client, user_test):
     message = "There is no menu yet for today"
-    with mock.patch('menu.views.TimeVerifier') as MockTimeVerifier:
+    with mock.patch("menu.views.TimeVerifier") as MockTimeVerifier:
         MockTimeVerifier.return_value.is_before_end_time.return_value = True
         client.force_login(user_test)
         client.login(username=user_test.username, password=user_test.password)
@@ -98,7 +108,7 @@ def test_should_not_get_the_form_to_select_menu_no_menu_yet(client, user_test):
 def test_should_not_get_the_form_to_create_a_menu_no_admin_ser(client, user_test):
     client.force_login(user_test)
     client.login(username=user_test.username, password=user_test.password)
-    response = client.get('/menu/create/')
+    response = client.get("/menu/create/")
     assert response.status_code == 403
 
 
@@ -106,12 +116,15 @@ def test_should_not_get_the_form_to_create_a_menu_no_admin_ser(client, user_test
 def test_should_create_a_menu_admin_ser(client, admin_user):
     client.force_login(admin_user)
     client.login(username=admin_user.username, password=admin_user.password)
-    response = client.post('/menu/create/', {
-        "date": "2021-07-02",
-        "option1": "example",
-        "option2": "example2",
-        "option3": "example3",
-    })
+    response = client.post(
+        "/menu/create/",
+        {
+            "date": "2021-07-02",
+            "option1": "example",
+            "option2": "example2",
+            "option3": "example3",
+        }
+    )
 
     today_menu = TodayMenu.objects.all()
     options = MenuOptions.objects.all()

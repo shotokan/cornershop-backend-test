@@ -222,13 +222,6 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "django.server",
         },
-        'celery': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': 'celery.log',
-            'formatter': 'simple',
-            'maxBytes': 1024 * 1024 * 100,  # 100 mb
-        },
     },
     "root": {"level": "WARNING", "handlers": ["sentry"]},
     "loggers": {
@@ -243,11 +236,6 @@ LOGGING = {
             "handlers": ["fluent", "console"],
             "level": os.getenv("APP_LOGGING_LEVEL", "INFO"),
             "propagate": True,
-        },
-        'celery': {
-            'handlers': ['celery', 'console'],
-            'level': 'DEBUG',
-            'propagate': True
         },
     },
 }

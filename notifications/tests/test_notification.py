@@ -29,11 +29,10 @@ def test_should_send_message_to_user(user_notification_1_test):
         MockSlackWrapper.return_value.send_message.return_value = True
         menu_id = str(uuid.uuid4())
         message = f"Hello, {user_notification_1_test.username}!, see today's menu {DOMAIN}/menu/select/{menu_id}"
-        notification_service = NotificationService()
+        notification_service = NotificationService(MockSlackWrapper())
 
         notification_service.send_message(menu_id)
 
-        MockSlackWrapper.assert_called_once()
         MockSlackWrapper.return_value.get_users.assert_called_once()
         MockSlackWrapper.return_value.send_message.assert_called_once_with(user_notification_1_test, message)
 
@@ -45,11 +44,10 @@ def test_should_send_message_to_two_users(user_notification_1_test, user_notific
         menu_id = str(uuid.uuid4())
         message_1 = f"Hello, {user_notification_1_test.username}!, see today's menu {DOMAIN}/menu/select/{menu_id}"
         message_2 = f"Hello, {user_notification_2_test.username}!, see today's menu {DOMAIN}/menu/select/{menu_id}"
-        notification_service = NotificationService()
+        notification_service = NotificationService(MockSlackWrapper())
 
         notification_service.send_message(menu_id)
 
-        MockSlackWrapper.assert_called_once()
         MockSlackWrapper.return_value.get_users.assert_called_once()
         MockSlackWrapper.return_value.send_message.assert_any_call(user_notification_1_test, message_1)
         MockSlackWrapper.return_value.send_message.assert_any_call(user_notification_2_test, message_2)
@@ -60,10 +58,9 @@ def test_should_not_send_message_to_user_when_no_users_in_slack(user_notificatio
         MockSlackWrapper.return_value.get_users.return_value = []
         MockSlackWrapper.return_value.send_message.return_value = True
         menu_id = str(uuid.uuid4())
-        notification_service = NotificationService()
+        notification_service = NotificationService(MockSlackWrapper())
 
         notification_service.send_message(menu_id)
 
-        MockSlackWrapper.assert_called_once()
         MockSlackWrapper.return_value.get_users.assert_called_once()
         MockSlackWrapper.return_value.send_message.assert_not_called()
