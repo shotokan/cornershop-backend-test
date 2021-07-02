@@ -23,6 +23,9 @@
 To avoid complexity in the front end, I limited the options 
 that can be had per menu to three. However, the database
 layout could accept more options per menu.
+
+I am using django forms and templates because it is an internal platform 
+and We can start as a monolithic.
 ```
 
 
