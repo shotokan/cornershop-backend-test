@@ -16,7 +16,15 @@
 ### Hostnames for accessing the service directly
 
 * Local: http://127.0.0.1:8000
-  
+
+
+
+```
+To avoid complexity in the front end, I limited the options 
+that can be had per menu to three. However, the database
+layout could accept more options per menu.
+```
+
 
 * /employees/login
 

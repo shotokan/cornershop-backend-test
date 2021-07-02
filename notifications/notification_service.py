@@ -10,8 +10,8 @@ class NotificationService:
     """
     This class is a service to be able to send a notification
     """
-    def __init__(self, slack_client: SlackWrapper):
-        self.__slack_client = slack_client
+    def __init__(self):
+        self.__slack_client = SlackWrapper()
 
     def send_message(self, menu_id):
         """

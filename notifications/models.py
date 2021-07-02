@@ -4,3 +4,6 @@ class UserNotification:
         self.username = username
         self.real_name = real_name
         self.email = email
+
+    def __str__(self):
+        return f"name: {self.real_name} username: {self.username}"

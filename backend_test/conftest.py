@@ -1,6 +1,5 @@
 import os
 
-import pytest
 from django.test import TestCase, TransactionTestCase
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend_test.settings")

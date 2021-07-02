@@ -1,19 +1,17 @@
-from celery.task import task
 from celery.utils.log import get_task_logger
 
+from backend_test.celery import app
+
 from .notification_service import NotificationService
-from .slack_client import SlackWrapper
 
 logger = get_task_logger(__name__)
 
 
-@task(name="send_menu_notification")
+@app.task(name="send_menu_notification")
 def send_menu_notification(menu_id):
     """
     This functions is used as a celery task to sent a notification through celery
     """
     logger.info("sending...")
-    slack_client = SlackWrapper()
-    notification = NotificationService(slack_client)
+    notification = NotificationService()
     notification.send_message(menu_id)
-    return True

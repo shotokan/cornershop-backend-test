@@ -11,9 +11,18 @@ from orders.models import Orders
 
 @login_required(login_url="/employees/login/")
 def orders_selected_view(request, menu_id):
+    """Saves the selected option from de menu into the db.
+    parameters:
+        request: django object
+        menu_id: an uuid that identifies a menu in db
+    returns:
+        HttpResponseBadRequest: response a bad request code and message
+        redirect: redirect to see a list of menus that has been selected by user
+    """
     if request.method == "POST":
         form = SelectOption(request.POST)
         if form.is_valid():
+            #TODO: Here needs to be validated the limitation time to be able to select an option
             new_order = Orders()
             today_menu = TodayMenu.objects.get(uuid=menu_id)
             option_selected = MenuOptions.objects.get(pk=form.cleaned_data["option"])
@@ -31,6 +40,11 @@ def orders_selected_view(request, menu_id):
 
 @login_required(login_url="/employees/login/")
 def orders_list_view(request):
+    """List all options that a employee has selected
+    parameters:
+        request: django object
+        render: a web page that displays the orders or option that belong to the employee
+    """
     orders = Orders.objects.filter(employee__id=request.user.id)
     date = datetime.utcnow()
     today_menu = TodayMenu.objects.filter(
